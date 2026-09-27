@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="uk" data-theme="blue-yellow">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#07090e">
+  <title>ПОТУЖНО ДРОП — Українське Онлайн Казино | Міни, Краш, Рулетка, Кейси, Апгрейдер</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='50' fill='%230057b7'/><rect y='50' width='100' height='50' fill='%23ffd700'/><text y='70' x='50' font-size='60' text-anchor='middle'>💣</text></svg>">
+</head>
+<body data-theme="blue-yellow">
+
+  <!-- ======================================================================
+       HEADER
+       ====================================================================== -->
+  <header class="app-header">
+    <div class="brand" id="brand-logo" title="На головну">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2L10 8H7C5 8 4 9 4 11V14C4 16 6 18 8 18H10V22H14V18H16C18 18 20 16 20 14V11C20 9 19 8 17 8H14L12 2Z" fill="#ffd700"/>
+          <path d="M11 5V15H13V5H11Z" fill="#0057b7"/>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <h1>ПОТУЖНО ДРОП</h1>
+        <span class="brand-badge" data-i18n="badge_official">🇺🇦 ОФІЦІЙНЕ КАЗИНО</span>
+      </div>
+    </div>
+
+    <!-- Навігація між усіма режимами -->
+    <nav class="nav-links">
+      <button class="nav-btn active" id="nav-lobby-btn">
+        <span>🏛️</span> <span data-i18n="nav_lobby">Головне меню</span>
+      </button>
+      <button class="nav-btn" id="nav-mines-btn">
+        <span>💣</span> <span data-i18n="nav_mines">Міни</span>
+      </button>
+      <button class="nav-btn" id="nav-crash-btn">
+        <span>🚀</span> <span data-i18n="nav_crash">Краш</span>
+      </button>
+      <button class="nav-btn" id="nav-roulette-btn">
+        <span>🎡</span> <span data-i18n="nav_roulette">Рулетка</span>
+      </button>
+      <button class="nav-btn" id="nav-cases-btn">
+        <span>📦</span> <span data-i18n="nav_cases">Кейси</span>
+      </button>
+      <button class="nav-btn" id="nav-upgrader-btn">
+        <span>⚡</span> <span data-i18n="nav_upgrader">Апгрейдер</span>
+      </button>
+    </nav>
+
+    <div class="header-actions">
+      <!-- Утиліти та швидкі дії (Інвентар, Донат, Мова, Тема, Звук) -->
+      <div class="header-utilities">
+        <button class="btn-sec-action btn-inv-header" id="btn-open-inventory" title="Мій інвентар предметів">
+          <span>🎒</span> <span class="action-label" data-i18n="nav_inventory">Інвентар</span> (<span id="inv-count-badge">0</span>)
+        </button>
+
+        <button class="btn-donate-header" id="btn-drone-donate" title="Задонатити 10 ₴ на дрони для ЗСУ!">
+          <span>🚁</span> <span class="donate-label-text" id="donate-label" data-i18n="drone_donate_label">Донат на дрони</span> (<span id="drones-count">420</span>)
+        </button>
+
+        <div class="lang-selector" title="Зміна мови / Смена языка">
+          <button class="lang-btn active" data-lang="ua">UA</button>
+          <button class="lang-btn" data-lang="ru">RU</button>
+        </div>
+
+        <button class="theme-quick-btn" id="theme-quick-toggle" title="Зміна теми (Синьо-жовтий / Червоно-чорний)">
+          <span id="theme-toggle-icon">🇺🇦</span>
+        </button>
+
+        <button class="sound-toggle-btn" id="sound-btn" title="Увімкнути/Вимкнути звук">
+          <span id="sound-icon">🔊</span>
+        </button>
+      </div>
+
+      <!-- Основна зона гравця: Баланс та Профіль (ЗАВЖДИ ВИДНО І ДОСТУПНО НА БУДЬ-ЯКОМУ ЕКРАНІ) -->
+      <div class="header-user-zone">
+        <div class="balance-widget" id="header-balance-widget" title="Натисніть для поповнення">
+          <div class="balance-info">
+            <span class="balance-label" data-i18n="balance_label">Баланс</span>
+            <div class="balance-val-container">
+              <span class="balance-amount" id="user-balance-val">1,000.00</span>
+              <span class="currency-symbol">₴</span>
+            </div>
+          </div>
+          <button class="btn-deposit-plus" id="btn-deposit-plus" title="Поповнити баланс">
+            +
+          </button>
+        </div>
+
+        <div class="profile-pill" id="btn-open-profile" title="Мій профіль (Виведення коштів, Історія, Тема)">
+          <div class="user-avatar-mini" id="header-avatar">⚔️</div>
+          <span class="user-name-mini" id="header-username">Козак</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ======================================================================
+       LIVE TICKER: СТРІЧКА ЖИВИХ ВИГРАШІВ (БЕЗ НАКЛАДАННЯ!)
+       ====================================================================== -->
+  <div class="live-ticker-bar">
+    <div class="ticker-tag">
+      <span class="pulse-dot"></span>
+      <span data-i18n="ticker_live">LIVE ДРОПИ:</span>
+    </div>
+    <div class="ticker-viewport">
+      <div class="ticker-items" id="ticker-slider">
+        <div class="ticker-item"><span class="ticker-user">Тарас_Бульба</span> <span class="ticker-mult">x4.50</span> <span class="ticker-win">+1,350 ₴</span> 💣</div>
+        <div class="ticker-item"><span class="ticker-user">БандероГусак</span> <span class="ticker-mult">x12.80</span> <span class="ticker-win">+6,400 ₴</span> 🚀</div>
+        <div class="ticker-item"><span class="ticker-user">Отаман_Степан</span> <span class="ticker-mult">x2.00</span> <span class="ticker-win">+1,200 ₴</span> ⚡</div>
+        <div class="ticker-item"><span class="ticker-user">Київський_Кіт</span> <span class="ticker-mult">x8.90</span> <span class="ticker-win">+8,900 ₴</span> 📦</div>
+        <div class="ticker-item"><span class="ticker-user">Козачка_Оксана</span> <span class="ticker-mult">x14.00</span> <span class="ticker-win">+2,800 ₴</span> 🎡</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       ОСНОВНИЙ КОНТЕЙНЕР ДОДАТКУ
+       ====================================================================== -->
+  <main class="main-container">
+
+    <!-- ------------------------------------------------------------------
+         ВКЛАДКА 1: ГОЛОВНЕ МЕНЮ (LOBBY)
+         ------------------------------------------------------------------ -->
+    <section id="view-lobby" class="view-section active">
+      <!-- Hero Banner -->
+      <div class="lobby-hero">
+        <div class="hero-content">
+          <div class="hero-tag" data-i18n="hero_tag">🇺🇦 ТОП-1 КАЗИНО В УКРАЇНІ</div>
+          <h2 class="hero-title" data-i18n="hero_title">ПОТУЖНИЙ КУШ<br>ЧЕКАЄ НА ТЕБЕ!</h2>
+          <p class="hero-subtitle" data-i18n="hero_subtitle">
+            Відчуй справжній козацький азарт у культових іграх: Міни, Краш, Козацька Рулетка, Бавовна Кейси та Апгрейдер! Множ свій баланс до небес та забирай миттєвий дроп у гривнях!
+          </p>
+          <div class="hero-btn-group">
+            <button class="btn-hero-play" id="btn-hero-start-mines">
+              <span>💣</span> <span data-i18n="btn_play_mines">ГРАТИ В МІНИ</span>
+            </button>
+            <button class="btn-hero-play" id="btn-hero-start-crash" style="background: linear-gradient(135deg, #0077ff 0%, #00d4ff 100%); color: #fff;">
+              <span>🚀</span> <span data-i18n="btn_play_crash">ГРАТИ В КРАШ</span>
+            </button>
+            <button class="btn-hero-play" id="btn-hero-start-cases" style="background: linear-gradient(135deg, #10b981 0%, #34d399 100%); color: #000;">
+              <span>📦</span> <span data-i18n="nav_cases">ВІДКРИВАТИ КЕЙСИ</span>
+            </button>
+            <button class="btn-sec-action" id="btn-hero-deposit" style="max-width: 220px; padding: 16px;">
+              <span>💳</span> <span data-i18n="btn_deposit_hero">Поповнити баланс</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Вибір режимів (УСІ РЕЖИМИ АКТИВНІ!) -->
+      <h3 class="section-title">
+        <span>🎮</span> <span data-i18n="section_modes">Вибір режимів гри</span>
+      </h3>
+
+      <div class="modes-grid">
+        <!-- Режим 1: МІНИ -->
+        <div class="mode-card active-mode" id="card-mode-mines">
+          <span class="mode-badge live" data-i18n="badge_live">● ДОСТУПНО</span>
+          <div>
+            <div class="mode-icon-wrapper">💣</div>
+            <h4 class="mode-title" data-i18n="mode_mines_title">МІНИ (MINES)</h4>
+            <p class="mode-desc" data-i18n="mode_mines_desc">
+              Класична гра з кристалами та бавовною! Відкривай безпечні сектори, збирай діаманти та вчасно забирай свій потужний виграш.
+            </p>
+          </div>
+          <div class="mode-meta">
+            <div class="meta-stat">
+              <span class="meta-label">RTP</span>
+              <span class="meta-value">98.5%</span>
+            </div>
+            <div class="meta-stat">
+              <span class="meta-label" data-i18n="stat_max_mult">МАКС. МНОЖНИК</span>
+              <span class="meta-value">x10,000</span>
+            </div>
+            <button class="btn-play-mode" data-i18n="btn_play">ГРАТИ</button>
+          </div>
+        </div>
+
+        <!-- Режим 2: КРАШ -->
+        <div class="mode-card active-mode" id="card-mode-crash">
+          <span class="mode-badge live" data-i18n="badge_live">● ДОСТУПНО</span>
+          <div>
+            <div class="mode-icon-wrapper" style="border-color: rgba(0, 212, 255, 0.4);">🚀</div>
+            <h4 class="mode-title" data-i18n="mode_crash_title">ПОТУЖНИЙ КРАШ</h4>
+            <p class="mode-desc" data-i18n="mode_crash_desc">
+              Ракета «Мрія» злітає в стратосферу! Коефіцієнт зростає щомиті. Встигни натиснути «Забрати» до того, як станеться бавовна!
+            </p>
+          </div>
+          <div class="mode-meta">
+            <div class="meta-stat">
+              <span class="meta-label">RTP</span>
+              <span class="meta-value">98.0%</span>
+            </div>
+            <div class="meta-stat">
+              <span class="meta-label" data-i18n="stat_max_mult">МАКС. МНОЖНИК</span>
+              <span class="meta-value">x1,000+</span>
+            </div>
+            <button class="btn-play-mode" style="background: linear-gradient(135deg, #ffd700 0%, #ff9500 100%); color: #000;" data-i18n="btn_play">ГРАТИ</button>
+          </div>
+        </div>
+
+        <!-- Режим 3: РУЛЕТКА -->
+        <div class="mode-card active-mode" id="card-mode-roulette">
+          <span class="mode-badge live" data-i18n="badge_live">● ДОСТУПНО</span>
+          <div>
+            <div class="mode-icon-wrapper" style="border-color: #34d399;">🎡</div>
+            <h4 class="mode-title" data-i18n="mode_roulette_title">КОЗАЦЬКА РУЛЕТКА</h4>
+            <p class="mode-desc" data-i18n="mode_roulette_desc">
+              Крути патріотичне колесо фортуни у синьо-жовтих кольорах із зеленим сектором «Тризуб» (x14 виплата)!
+            </p>
+          </div>
+          <div class="mode-meta">
+            <div class="meta-stat">
+              <span class="meta-label">RTP</span>
+              <span class="meta-value">97.3%</span>
+            </div>
+            <div class="meta-stat">
+              <span class="meta-label" data-i18n="stat_max_mult">МАКС. МНОЖНИК</span>
+              <span class="meta-value">x14.00</span>
+            </div>
+            <button class="btn-play-mode" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);" data-i18n="btn_play">ГРАТИ</button>
+          </div>
+        </div>
+
+        <!-- Режим 4: ДРОП КЕЙСИ -->
+        <div class="mode-card active-mode" id="card-mode-cases">
+          <span class="mode-badge live" data-i18n="badge_live">● ДОСТУПНО</span>
+          <div>
+            <div class="mode-icon-wrapper" style="border-color: #a855f7;">📦</div>
+            <h4 class="mode-title" data-i18n="mode_cases_title">БАВОВНА ДРОП (КЕЙСИ)</h4>
+            <p class="mode-desc" data-i18n="mode_cases_desc">
+              Відкривай мемні кейси з салом, Псом Патроном, збитим Шахедом та дроном Паляниця!
+            </p>
+          </div>
+          <div class="mode-meta">
+            <div class="meta-stat">
+              <span class="meta-label">ДРОП</span>
+              <span class="meta-value">Сало, Патрон, Дрони</span>
+            </div>
+            <div class="meta-stat">
+              <span class="meta-label" data-i18n="stat_max_mult">КУШ</span>
+              <span class="meta-value">20,000 ₴</span>
+            </div>
+            <button class="btn-play-mode" style="background: linear-gradient(135deg, #a855f7 0%, #6366f1 100%);" data-i18n="btn_play">ГРАТИ</button>
+          </div>
+        </div>
+
+        <!-- Режим 5: АПГРЕЙДЕР -->
+        <div class="mode-card active-mode" id="card-mode-upgrader">
+          <span class="mode-badge live" data-i18n="badge_live">● ДОСТУПНО</span>
+          <div>
+            <div class="mode-icon-wrapper" style="border-color: #00e5ff;">⚡</div>
+            <h4 class="mode-title" data-i18n="mode_upgrader_title">ПОТУЖНИЙ АПГРЕЙДЕР</h4>
+            <p class="mode-desc" data-i18n="mode_upgrader_desc">
+              Покращуй вибиті предмети до x2, x5, x10 або x50 вартості! Вибирай множник та випробовуй козацьку вдачу на колесі шансів!
+            </p>
+          </div>
+          <div class="mode-meta">
+            <div class="meta-stat">
+              <span class="meta-label">ШАНСИ</span>
+              <span class="meta-value">До 64%</span>
+            </div>
+            <div class="meta-stat">
+              <span class="meta-label" data-i18n="stat_max_mult">МАКС. МНОЖНИК</span>
+              <span class="meta-value">x50.00</span>
+            </div>
+            <button class="btn-play-mode" style="background: linear-gradient(135deg, #0077ff 0%, #00d4ff 100%);" data-i18n="btn_play">ГРАТИ</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ------------------------------------------------------------------
+         ВКЛАДКА 2: ГРА В МІНИ (MINES ARENA)
+         ------------------------------------------------------------------ -->
+    <section id="view-mines" class="view-section">
+      <div class="game-layout">
+        <!-- ЛІВА ПАНЕЛЬ: КЕРУВАННЯ СТАВКАМИ ТА МІНАМИ -->
+        <div class="bet-panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <span>💣</span>
+              <span data-i18n="mines_panel_title">МІНИ</span>
+            </div>
+            <div class="provably-badge" id="btn-provably-info" data-i18n="provably_fair_badge" title="Алгоритм Provably Fair гарантує 100% чесність кожного раунду">
+              🛡️ Чесна гра
+            </div>
+          </div>
+
+          <!-- Поле ставки -->
+          <div class="form-group bet-amount-group">
+            <div class="form-label">
+              <span data-i18n="bet_amount_label">Сума ставки</span>
+              <span id="bet-limits-hint" style="color: var(--text-dim);" data-i18n="bet_limits">Мін: 10 ₴ • Макс: 10,000 ₴</span>
+            </div>
+            <div class="input-with-addons">
+              <span class="input-addon-currency">₴</span>
+              <input type="number" id="bet-amount-input" class="bet-input" value="50" min="10" max="10000" step="10">
+              <div class="quick-bet-actions">
+                <button class="btn-bet-mod" id="btn-bet-half">½</button>
+                <button class="btn-bet-mod" id="btn-bet-double">2X</button>
+                <button class="btn-bet-mod" id="btn-bet-max">MAX</button>
+              </div>
+            </div>
+
+            <!-- Швидкі фішки -->
+            <div class="chips-row">
+              <button class="btn-chip" data-chip="20">+20</button>
+              <button class="btn-chip" data-chip="50">+50</button>
+              <button class="btn-chip" data-chip="100">+100</button>
+              <button class="btn-chip" data-chip="250">+250</button>
+              <button class="btn-chip" data-chip="500">+500</button>
+            </div>
+          </div>
+
+          <!-- Кількість мін -->
+          <div class="form-group mines-count-group">
+            <div class="form-label">
+              <span data-i18n="mines_count_label">Кількість мін (небезпека)</span>
+              <span id="gems-count-hint" style="color: #00d4ff;">Діамантів: 22</span>
+            </div>
+            <div class="mines-select-box">
+              <div class="mines-stepper">
+                <button class="stepper-btn" id="btn-mine-minus">−</button>
+                <div class="mines-current-val" id="mines-count-display">3</div>
+                <button class="stepper-btn" id="btn-mine-plus">+</button>
+              </div>
+              <div class="mines-pills-row">
+                <button class="btn-mine-pill" data-mines="1">1</button>
+                <button class="btn-mine-pill selected" data-mines="3">3</button>
+                <button class="btn-mine-pill" data-mines="5">5</button>
+                <button class="btn-mine-pill" data-mines="10">10</button>
+                <button class="btn-mine-pill" data-mines="24">24</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Статистика поточного раунду -->
+          <div class="game-stats-box" id="mines-stats-box">
+            <div class="stat-row">
+              <span class="stat-name" data-i18n="stat_cur_mult">Поточний множник:</span>
+              <span class="stat-val-highlight" id="stat-current-mult">x1.00</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-name" data-i18n="stat_next_mult">Наступний діамант:</span>
+              <span class="stat-val-highlight" id="stat-next-mult" style="color: #10b981;">x1.12</span>
+            </div>
+            <div class="stat-row" style="margin-top: 6px; padding-top: 6px; border-top: 1px dashed var(--border-subtle);">
+              <span class="stat-name" data-i18n="stat_possible_win">Можливий виграш:</span>
+              <span class="stat-win-amount" id="stat-current-payout">0.00 ₴</span>
+            </div>
+          </div>
+
+          <!-- Головна кнопка дії -->
+          <button class="btn-action-main btn-bet-start" id="btn-main-action">
+            ПОЧАТИ ГРУ (50 ₴)
+          </button>
+
+          <!-- Додаткові дії -->
+          <div class="secondary-actions-row">
+            <button class="btn-sec-action" id="btn-random-tile" disabled>
+              🎲 <span data-i18n="btn_random_tile">Випадковий вибір</span>
+            </button>
+            <button class="btn-sec-action" id="btn-back-lobby">
+              🏛️ <span data-i18n="btn_to_lobby">У лобі</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- ПРАВА АРЕНА: СІТКА 5x5 ТА МНОЖНИКИ -->
+        <div class="mines-arena">
+          <div class="multipliers-stream" id="mult-stream-bar"></div>
+          <div class="mines-grid-wrapper">
+            <div class="mines-grid" id="mines-grid"></div>
+            <div class="game-result-banner" id="game-result-overlay">
+              <div class="result-title" id="result-overlay-title">ПОТУЖНИЙ КЕШАУТ!</div>
+              <div class="result-mult" id="result-overlay-mult">x2.45</div>
+              <div class="result-payout" id="result-overlay-payout">+245.00 ₴</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ------------------------------------------------------------------
+         ВКЛАДКА 3: РЕЖИМ ГРИ «ПОТУЖНИЙ КРАШ» (CRASH ARENA)
+         ------------------------------------------------------------------ -->
+    <section id="view-crash" class="view-section">
+      <div class="crash-layout">
+        <!-- ЛІВА ПАНЕЛЬ СТАВОК КРАШ -->
+        <div class="bet-panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <span>🚀</span>
+              <span data-i18n="crash_panel_title">ПОТУЖНИЙ КРАШ</span>
+            </div>
+            <div class="provably-badge" data-i18n="provably_fair_badge" title="RTP 98.0% • Хеш SHA-256">
+              🛡️ Чесна гра
+            </div>
+          </div>
+
+          <!-- Поле ставки -->
+          <div class="form-group crash-bet-group">
+            <div class="form-label">
+              <span data-i18n="bet_amount_label">Сума ставки</span>
+              <span style="color: var(--text-dim);" data-i18n="bet_limits">Мін: 10 ₴ • Макс: 10,000 ₴</span>
+            </div>
+            <div class="input-with-addons">
+              <span class="input-addon-currency">₴</span>
+              <input type="number" id="crash-bet-input" class="bet-input" value="50" min="10" max="10000" step="10">
+              <div class="quick-bet-actions">
+                <button class="btn-bet-mod" id="btn-crash-half">½</button>
+                <button class="btn-bet-mod" id="btn-crash-double">2X</button>
+                <button class="btn-bet-mod" id="btn-crash-max">MAX</button>
+              </div>
+            </div>
+
+            <!-- Швидкі фішки -->
+            <div class="chips-row">
+              <button class="btn-chip" data-cchip="20">+20</button>
+              <button class="btn-chip" data-cchip="50">+50</button>
+              <button class="btn-chip" data-cchip="100">+100</button>
+              <button class="btn-chip" data-cchip="250">+250</button>
+              <button class="btn-chip" data-cchip="500">+500</button>
+            </div>
+          </div>
+
+          <!-- Авто-виведення (Auto Cashout) -->
+          <div class="form-group crash-auto-group">
+            <div class="form-label">
+              <span data-i18n="auto_cashout_label">Авто-кешаут (Коефіцієнт)</span>
+              <span style="color: #ffd700;">Напр: 2.00x</span>
+            </div>
+            <div class="input-with-addons">
+              <span class="input-addon-currency" style="color: #00d4ff;">x</span>
+              <input type="number" id="crash-auto-mult" class="bet-input" value="2.00" min="1.01" max="1000" step="0.10">
+            </div>
+          </div>
+
+          <!-- Статистика раунду Краш -->
+          <div class="game-stats-box" id="crash-stats-box">
+            <div class="stat-row">
+              <span class="stat-name" data-i18n="crash_stat_status">Статус раунду:</span>
+              <span class="stat-val-highlight" id="crash-round-status-badge" style="color: #ffd700;">ОЧІКУВАННЯ</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-name" data-i18n="stat_cur_mult">Поточний множник:</span>
+              <span class="stat-val-highlight" id="crash-side-mult">x1.00</span>
+            </div>
+            <div class="stat-row" style="margin-top: 6px; padding-top: 6px; border-top: 1px dashed var(--border-subtle);">
+              <span class="stat-name" data-i18n="stat_possible_win">Виграш у разі кешауту:</span>
+              <span class="stat-win-amount" id="crash-side-payout">0.00 ₴</span>
+            </div>
+          </div>
+
+          <!-- Головна кнопка дії Краш -->
+          <button class="btn-action-main btn-bet-start" id="btn-crash-action">
+            СТАВКА (50 ₴)
+          </button>
+
+          <div class="secondary-actions-row">
+            <button class="btn-sec-action" id="btn-crash-to-lobby">
+              🏛️ <span data-i18n="btn_to_lobby">У лобі</span>
+            </button>
+            <button class="btn-sec-action" id="btn-crash-to-mines">
+              💣 <span data-i18n="nav_mines">Міни</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- ПРАВА АРЕНА: КАНВАС З РАКЕТОЮ ТА СТРІЧКА КРАШІВ -->
+        <div class="crash-arena">
+          <div class="crash-history-bar" id="crash-history-bar"></div>
+          <div class="crash-canvas-wrapper">
+            <canvas id="crash-canvas"></canvas>
+            <div class="crash-center-readout">
+              <div class="crash-counter-val" id="crash-multiplier-text">1.00x</div>
+              <div class="crash-status-sub" id="crash-status-sub">ДО СТАРТУ: 5.0с</div>
+            </div>
+          </div>
+
+          <!-- Таблиця живих ставок інших гравців -->
+          <div class="crash-live-bets">
+            <div class="crash-bets-header">
+              <span data-i18n="crash_player">ГРАВЕЦЬ</span>
+              <span data-i18n="crash_stake">СТАВКА</span>
+              <span data-i18n="crash_cashout">КЕШАУТ</span>
+            </div>
+            <div class="crash-bets-list" id="crash-bets-list"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ------------------------------------------------------------------
+         ВКЛАДКА 4: РЕЖИМ «КОЗАЦЬКА РУЛЕТКА» (ROULETTE ARENA)
+         ------------------------------------------------------------------ -->
+    <section id="view-roulette" class="view-section">
+      <div class="roulette-arena">
+        <!-- Колесо рулетки на Canvas -->
+        <div class="roulette-wheel-box">
+          <div class="roulette-pointer"></div>
+          <canvas id="roulette-canvas" width="380" height="380"></canvas>
+        </div>
+
+        <!-- Панель ставок рулетки -->
+        <div class="roulette-table">
+          <div class="panel-header" style="margin-bottom: 8px;">
+            <div class="panel-title">
+              <span>🎡</span>
+              <span data-i18n="mode_roulette_title">КОЗАЦЬКА РУЛЕТКА</span>
+            </div>
+            <div class="provably-badge" data-i18n="provably_fair_badge">🛡️ Чесна гра</div>
+          </div>
+
+          <!-- Сектори ставок -->
+          <div class="roulette-bet-sectors">
+            <button class="btn-roulette-sector sec-blue selected" data-rsector="blue">
+              <span>🔵 СИНІЙ</span>
+              <span class="sector-payout">2X ВИПЛАТА</span>
+              <span class="roulette-bet-chip" id="r-chip-blue">50 ₴</span>
+            </button>
+
+            <button class="btn-roulette-sector sec-green" data-rsector="green">
+              <span>🟢 ТРИЗУБ (0)</span>
+              <span class="sector-payout">14X ВИПЛАТА</span>
+              <span class="roulette-bet-chip" id="r-chip-green">0 ₴</span>
+            </button>
+
+            <button class="btn-roulette-sector sec-yellow" data-rsector="yellow">
+              <span>🟡 ЖОВТИЙ</span>
+              <span class="sector-payout">2X ВИПЛАТА</span>
+              <span class="roulette-bet-chip" id="r-chip-yellow">0 ₴</span>
+            </button>
+          </div>
+
+          <!-- Вибір суми ставки фішкою -->
+          <div class="form-group" style="margin-top: 10px; margin-bottom: 12px;">
+            <div class="form-label">
+              <span data-i18n="bet_amount_label">Сума ставки на сектор:</span>
+              <span id="roulette-total-bet-hint" style="color: #ffd700;">Ставка: 50 ₴</span>
+            </div>
+            <div class="input-with-addons">
+              <span class="input-addon-currency">₴</span>
+              <input type="number" id="roulette-bet-input" class="bet-input" value="50" min="10" max="10000" step="10">
+              <div class="quick-bet-actions">
+                <button class="btn-bet-mod" id="btn-roulette-half">½</button>
+                <button class="btn-bet-mod" id="btn-roulette-double">2X</button>
+                <button class="btn-bet-mod" id="btn-roulette-max">MAX</button>
+              </div>
+            </div>
+            <div class="chips-row" style="margin-top: 6px;">
+              <button class="btn-chip" data-rchip="20">+20</button>
+              <button class="btn-chip" data-rchip="50">+50</button>
+              <button class="btn-chip" data-rchip="100">+100</button>
+              <button class="btn-chip" data-rchip="250">+250</button>
+              <button class="btn-chip" data-rchip="500">+500</button>
+            </div>
+          </div>
+
+          <button class="btn-action-main btn-bet-start" id="btn-spin-roulette">
+            <span>🎡</span> КРУТИТИ РУЛЕТКУ (50 ₴)
+          </button>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ------------------------------------------------------------------
+         ВКЛАДКА 5: РЕЖИМ «БАВОВНА КЕЙСИ» (CASES ARENA)
+         ------------------------------------------------------------------ -->
+    <section id="view-cases" class="view-section">
+      <!-- Горизонтальна рулетка відкриття (активується при відкритті) -->
+      <div class="case-roulette-container" id="case-open-arena" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 8px;">
+          <h4 class="modal-title" id="case-opening-title">ВІДКРИТТЯ КЕЙСУ</h4>
+          <button class="btn-sec-action" id="btn-close-case-arena" style="padding: 6px 14px;">✕ Закрити</button>
+        </div>
+
+        <!-- Вибір кількості відкриттів: X1, X2, X5, X10 -->
+        <div class="case-multi-selector">
+          <span class="multi-count-label" data-i18n="case_open_count">Відкрити одразу:</span>
+          <div class="case-multi-btn-group">
+            <button class="btn-case-count active" data-count="1">X1</button>
+            <button class="btn-case-count" data-count="2">X2</button>
+            <button class="btn-case-count" data-count="5">X5</button>
+            <button class="btn-case-count" data-count="10">X10</button>
+          </div>
+        </div>
+
+        <!-- Стрічка прокрутки для X1 -->
+        <div class="case-roulette-viewport" id="case-single-viewport">
+          <div class="case-roulette-line"></div>
+          <div class="case-roulette-tape" id="case-tape"></div>
+        </div>
+
+        <!-- Контейнер для мульти-відкриття (X2, X5, X10) -->
+        <div class="case-multi-drop-grid" id="case-multi-drop-display" style="display: none;"></div>
+
+        <!-- Кнопка відкриття -->
+        <div style="text-align: center; margin-top: 18px;">
+          <button class="btn-action-main btn-bet-start" id="btn-start-case-spin" style="max-width: 340px; margin: 0 auto;">
+            КРУТИТИ КЕЙС!
+          </button>
+        </div>
+
+        <!-- Детальний перегляд предметів у відкритому кейсі (ФОТО, НАЗВИ, ЦІНИ, ОКУПНІСТЬ) -->
+        <div class="case-contents-preview-box" id="case-preview-wrapper">
+          <div class="case-contents-header">
+            <span class="case-contents-title" id="case-contents-title">🔍 ВМІСТ КЕЙСУ ТА ШАНСИ:</span>
+            <span class="case-contents-magic-badge" title="Шанс 5% на помноження вартості будь-якого вибитого предмета!">✨ 5% МАГІЧНИЙ ДРОП</span>
+          </div>
+          <div class="case-items-grid" id="case-items-detailed-preview">
+            <!-- Заповнюється динамічно при відкритті кейса -->
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-title">
+        <span>📦</span> <span data-i18n="mode_cases_title">БАВОВНА ДРОП — МЕМНІ УКРАЇНСЬКІ КЕЙСИ</span>
+      </h3>
+
+      <div class="cases-grid" id="cases-catalog">
+        <!-- 3 Кейси генеруються динамічно у JS -->
+      </div>
+    </section>
+
+
+    <!-- ------------------------------------------------------------------
+         ВКЛАДКА 6: РЕЖИМ «ПОТУЖНИЙ АПГРЕЙДЕР» (UPGRADER ARENA)
+         ------------------------------------------------------------------ -->
+    <section id="view-upgrader" class="view-section">
+      <div class="upgrader-arena">
+        <!-- ЛІВИЙ БЛОК: ДО 5 ПРЕДМЕТІВ У СЛОТАХ ДЛЯ АПГРЕЙДУ -->
+        <div class="upgrader-card-box has-item" id="upg-source-box">
+          <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 8px;">
+            <span style="font-size: 0.72rem; color: var(--text-dim); text-transform: uppercase;">Слоти апгрейду (до 5 шт):</span>
+            <span id="upg-slots-count-badge" style="font-size: 0.72rem; color: #ffd700; font-weight: 800;">0 / 5</span>
+          </div>
+
+          <!-- 5 слотів під предмети -->
+          <div class="upgrader-slots-grid" id="upg-slots-rack">
+            <!-- 5 слотів генеруються динамічно -->
+          </div>
+
+          <!-- Сумарна ціна обраних предметів -->
+          <div class="upg-summary-row">
+            <span style="font-size: 0.72rem; color: var(--text-muted);">Загальна сума:</span>
+            <span id="upg-source-price" style="font-family: var(--font-display); font-size: 1.15rem; font-weight: 900; color: #ffd700;">160.00 ₴</span>
+          </div>
+
+          <!-- Кнопки керування слотами -->
+          <div style="display: flex; gap: 6px; width: 100%; margin-top: 10px;">
+            <button class="btn-sec-action" id="btn-select-upg-item" style="flex: 1; font-size: 0.72rem; padding: 7px 10px;">
+              🎒 Додати з інвентарю
+            </button>
+            <button class="btn-sec-action" id="btn-clear-upg-slots" style="font-size: 0.72rem; padding: 7px 10px; color: #ff6b6b;" title="Очистити всі слоти">
+              🗑️
+            </button>
+          </div>
+        </div>
+
+        <!-- ЦЕНТР: КОЛЕСО ШАНСІВ ТА МНОЖНИКИ -->
+        <div class="upgrader-wheel-center">
+          <div class="wheel-canvas-box">
+            <canvas id="upgrader-canvas" width="280" height="280"></canvas>
+            <div class="upgrader-wheel-overlay">
+              <div class="upgrader-chance-val" id="upg-chance-display">50.0%</div>
+              <div class="upgrader-chance-label" id="upg-chance-label">Шанс успіху</div>
+            </div>
+          </div>
+
+          <!-- Перемикач режимів: Звичайний / МІСТИЧНИЙ АПГРЕЙД -->
+          <div style="margin: 12px 0 8px 0; width: 100%; text-align: center;">
+            <button class="btn-mystic-toggle" id="btn-upg-mystic-mode">
+              <span>🔮</span> <span id="btn-mystic-label">МІСТИЧНИЙ АПГРЕЙД (100% ШАНС)</span>
+            </button>
+          </div>
+
+          <!-- Множники апгрейду (звичайний режим) -->
+          <div class="upgrader-multipliers-row" id="upg-multipliers-container">
+            <button class="btn-upg-mult" data-umult="1.5">1.5X (66.6%)</button>
+            <button class="btn-upg-mult selected" data-umult="2.0">2.0X (50%)</button>
+            <button class="btn-upg-mult" data-umult="3.0">3.0X (33.3%)</button>
+            <button class="btn-upg-mult" data-umult="5.0">5.0X (20%)</button>
+            <button class="btn-upg-mult" data-umult="10.0">10X (10%)</button>
+            <button class="btn-upg-mult" data-umult="20.0">20X (5%)</button>
+            <button class="btn-upg-mult" data-umult="50.0">50X (2%)</button>
+          </div>
+
+          <div style="margin-top: 16px; width: 100%; text-align: center;">
+            <button class="btn-upgrade-action" id="btn-execute-upgrade">
+              ⚡ АПГРЕЙДИТИ ДО X2!
+            </button>
+          </div>
+        </div>
+
+        <!-- ПРАВИЙ БЛОК: ЦІЛЬОВИЙ ПРЕДМЕТ -->
+        <div class="upgrader-card-box has-item" id="upg-target-box">
+          <div id="upg-target-header" style="font-size: 0.72rem; color: #00d4ff; text-transform: uppercase; margin-bottom: 8px;">Цільовий предмет (x2.0):</div>
+          <div id="upg-target-icon" class="upg-icon-box">🛸</div>
+          <div id="upg-target-name" style="font-family: var(--font-display); font-size: 0.85rem; font-weight: 800; color: #fff;">Козацька Медовуха 70°</div>
+          <div id="upg-target-price" style="font-family: var(--font-display); font-size: 1.15rem; font-weight: 900; color: #00d4ff; margin: 6px 0;">320.00 ₴</div>
+          <div id="upg-target-desc" style="font-size: 0.7rem; color: #10b981;">При успіху потрапляє в інвентар!</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ======================================================================
+       ІНТЕРАКТИВНИЙ МЕМ-ПОМІЧНИК: ПЕС ПАТРОН
+       ====================================================================== -->
+  <div class="patron-assistant" id="patron-widget">
+    <div class="patron-avatar-box" id="patron-clicker" title="Пес Патрон! Натисни, щоб він гавкнув та дав пораду!">
+      🐶
+      <span class="patron-badge-mini">🇺🇦</span>
+    </div>
+    <div class="patron-bubble" id="patron-bubble">
+      <div class="patron-bubble-title">
+        <span>Пес Патрон</span>
+        <span style="font-size: 0.65rem; color: #00d4ff;">ПОРАДА 💡</span>
+      </div>
+      <div id="patron-quote">Гав! Патрон чує: сьогодні на 2.50x буде потужна бавовна! Тисни сюди!</div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       МОДАЛЬНЕ ВІКНО: ІНВЕНТАР ГРАВЦЯ (🎒)
+       ====================================================================== -->
+  <div class="modal-backdrop" id="modal-inventory">
+    <div class="modal-card" style="max-width: 650px;">
+      <div class="modal-header">
+        <div class="modal-title-box">
+          <span style="font-size: 1.5rem;">🎒</span>
+          <h3 class="modal-title" data-i18n="inventory_modal_title">Мій козацький інвентар</h3>
+        </div>
+        <button class="btn-close-modal" data-close="modal-inventory">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+          <span style="font-size: 0.8rem; color: var(--text-muted);" id="inventory-total-value">Загальна вартість: 0.00 ₴</span>
+          <button class="btn-sec-action" id="btn-sell-all-inventory" style="padding: 6px 12px; font-size: 0.72rem; color: #ffd700;">
+            💰 Продати всі предмети
+          </button>
+        </div>
+
+        <!-- Панель вибору предметів для апгрейду (до 5 шт) -->
+        <div class="inventory-upg-action-bar" id="inventory-upg-bar">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 1.1rem;">⚡</span>
+            <div>
+              <div style="font-size: 0.76rem; font-weight: 700; color: #fff;">ОБРАНО ДЛЯ АПГРЕЙДУ:</div>
+              <div style="font-size: 0.72rem; color: #ffd700;">
+                <span id="inv-selected-upg-count">0</span> / 5 предметів (<span id="inv-selected-upg-sum">0.00 ₴</span>)
+              </div>
+            </div>
+          </div>
+          <button class="btn-action-main" id="btn-apply-upg-selection" style="padding: 6px 14px; font-size: 0.76rem; width: auto; margin: 0; min-width: 130px;">
+            ⚡ В Апгрейдер
+          </button>
+        </div>
+
+        <div class="inventory-grid" id="inventory-items-container">
+          <!-- Предмети генеруються динамічно -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       МОДАЛЬНЕ ВІКНО: ПОПОВНЕННЯ БАЛАНСУ (+)
+       ====================================================================== -->
+  <div class="modal-backdrop" id="modal-deposit">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title-box">
+          <span style="font-size: 1.5rem;">💳</span>
+          <h3 class="modal-title" data-i18n="deposit_modal_title">Поповнення балансу</h3>
+        </div>
+        <button class="btn-close-modal" data-close="modal-deposit">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Повідомлення про 1-годинний ліміт 10,000 ₴ -->
+        <div class="deposit-limit-banner" id="deposit-limit-banner">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 1.15rem;">⏱️</span>
+            <div>
+              <div style="font-size: 0.76rem; font-weight: 700; color: #ffd700;" data-i18n="deposit_hourly_limit_title">ЛІМІТ ПОПОВНЕННЯ: 10,000 ₴ НА 1 ГОДИНУ</div>
+              <div style="font-size: 0.7rem; color: var(--text-muted);">
+                <span data-i18n="deposit_hourly_available">Доступно для поповнення зараз:</span> 
+                <strong id="deposit-hourly-available-text" style="color: #10b981;">10,000.00 ₴</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <label class="form-label" data-i18n="choose_payment_method">Оберіть платіжний метод:</label>
+        <div class="payment-methods-grid">
+          <div class="payment-method-card selected" data-method="monobank">
+            <div class="method-icon" style="background: #000; color: #fff;">🐱</div>
+            <div>
+              <div class="method-title">Monobank</div>
+              <div class="method-fee" data-i18n="fee_zero_instant">0% комісія • Миттєво</div>
+            </div>
+          </div>
+
+          <div class="payment-method-card" data-method="privat24">
+            <div class="method-icon" style="background: #1b8a36; color: #fff;">🟢</div>
+            <div>
+              <div class="method-title">Приват24</div>
+              <div class="method-fee" data-i18n="fee_zero_instant">0% комісія • Миттєво</div>
+            </div>
+          </div>
+
+          <div class="payment-method-card" data-method="card">
+            <div class="method-icon" style="background: #0057b7; color: #fff;">💳</div>
+            <div>
+              <div class="method-title">Visa / Mastercard</div>
+              <div class="method-fee" data-i18n="all_ua_banks">Усі українські банки</div>
+            </div>
+          </div>
+
+          <div class="payment-method-card" data-method="usdt">
+            <div class="method-icon" style="background: #26a17b; color: #fff;">₮</div>
+            <div>
+              <div class="method-title">USDT (TRC-20)</div>
+              <div class="method-fee" data-i18n="crypto_label">Криптовалюта</div>
+            </div>
+          </div>
+        </div>
+
+        <label class="form-label" data-i18n="choose_deposit_sum">Оберіть або введіть суму поповнення (₴):</label>
+        <div class="presets-grid">
+          <button class="btn-preset-val" data-amount="100">+100 ₴</button>
+          <button class="btn-preset-val" data-amount="250">+250 ₴</button>
+          <button class="btn-preset-val" data-amount="500">+500 ₴</button>
+          <button class="btn-preset-val" data-amount="1000">+1,000 ₴</button>
+          <button class="btn-preset-val" data-amount="2500">+2,500 ₴</button>
+          <button class="btn-preset-val" data-amount="5000">+5,000 ₴</button>
+        </div>
+
+        <div class="form-group">
+          <div class="input-with-addons">
+            <span class="input-addon-currency">₴</span>
+            <input type="number" id="deposit-amount-input" class="bet-input" value="500" min="50" max="50000" step="50">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">
+            <span data-i18n="promocode_label">Промокод (необов'язково)</span>
+            <span style="color: #ffd700;">Бонус: POTUZHNO</span>
+          </label>
+          <input type="text" id="deposit-promocode" class="bet-input" placeholder="Введіть промокод..." style="background: var(--bg-input); padding: 12px; border-radius: 8px; border: 1px solid var(--border-subtle); width: 100%;">
+        </div>
+
+        <button class="btn-submit-action btn-submit-deposit" id="btn-submit-deposit-action">
+          <span>⚡</span> <span data-i18n="btn_deposit_submit">ПОПОВНИТИ БАЛАНС</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       МОДАЛЬНЕ ВІКНО: ПРОФІЛЬ ГРАВЦЯ (З ВИВЕДЕННЯМ ТА ІСТОРІЄЮ!)
+       ====================================================================== -->
+  <div class="modal-backdrop" id="modal-profile">
+    <div class="modal-card" style="max-width: 620px;">
+      <div class="modal-header">
+        <div class="modal-title-box">
+          <span style="font-size: 1.5rem;">👤</span>
+          <h3 class="modal-title" data-i18n="profile_modal_title">Особистий кабінет</h3>
+        </div>
+        <button class="btn-close-modal" data-close="modal-profile">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="profile-card-top">
+          <div class="profile-big-avatar" id="profile-modal-avatar">⚔️</div>
+          <div class="profile-meta-info">
+            <h4 class="profile-username" id="profile-modal-name">Козак Тарас</h4>
+            <div class="profile-tag-box" style="display: flex; align-items: center; gap: 6px; margin: 2px 0;">
+              <span class="profile-tag" id="profile-modal-tag" style="color: #00d4ff; font-weight: 800; font-size: 0.82rem; font-family: var(--font-display);">@cossack</span>
+              <button class="btn-copy-tag" id="btn-copy-user-tag" title="Скопіювати юзернейм" style="background: rgba(0, 212, 255, 0.15); border: 1px solid rgba(0, 212, 255, 0.4); color: #00d4ff; border-radius: 4px; padding: 1px 6px; font-size: 0.65rem; cursor: pointer;">📋</button>
+            </div>
+            <div class="profile-rank" id="profile-modal-rank">🇺🇦 Гетьман Азарту</div>
+            <div class="profile-id" id="profile-modal-id">ID: #UA-778899</div>
+          </div>
+          <div style="text-align: right;">
+            <div style="font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase;" data-i18n="current_balance_label">Поточний баланс</div>
+            <div style="font-family: var(--font-display); font-size: 1.3rem; font-weight: 900; color: #ffd700;" id="profile-modal-balance">1,000.00 ₴</div>
+          </div>
+        </div>
+
+        <!-- Вибір мови в профілі -->
+        <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-card); padding: 10px 14px; border-radius: var(--radius-md); margin-bottom: 12px; border: 1px solid var(--border-subtle); flex-wrap: wrap; gap: 8px;">
+          <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);" data-i18n="language_choice_label">🌐 Мова інтерфейсу (Валюта: завжди ₴):</span>
+          <div class="lang-selector">
+            <button class="lang-btn active" data-lang="ua">🇺🇦 Українська</button>
+            <button class="lang-btn" data-lang="ru">🌐 Русский</button>
+          </div>
+        </div>
+
+        <!-- Вибір теми оформлення (Український прапор / Червоно-чорний стяг) -->
+        <div class="theme-setting-card">
+          <div class="theme-setting-title">
+            <span>🎨</span> <span data-i18n="theme_choice_label">Тема оформлення (Весь інтерфейс):</span>
+          </div>
+          <div class="theme-selector-grid">
+            <button class="theme-card-btn active" data-theme-btn="blue-yellow" id="theme-btn-by">
+              <div class="theme-swatch swatch-blue-yellow">
+                <div class="swatch-stripe swatch-blue"></div>
+                <div class="swatch-stripe swatch-yellow"></div>
+              </div>
+              <div class="theme-btn-info">
+                <span class="theme-name" data-i18n="theme_by_title">🇺🇦 Синьо-Жовтий</span>
+                <span class="theme-sub" data-i18n="theme_by_sub">Класичний прапор</span>
+              </div>
+            </button>
+            <button class="theme-card-btn" data-theme-btn="red-black" id="theme-btn-rb">
+              <div class="theme-swatch swatch-red-black">
+                <div class="swatch-stripe swatch-red"></div>
+                <div class="swatch-stripe swatch-black"></div>
+              </div>
+              <div class="theme-btn-info">
+                <span class="theme-name" data-i18n="theme_rb_title">🚩 Червоно-Чорний</span>
+                <span class="theme-sub" data-i18n="theme_rb_sub">Бойовий стяг УПА</span>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Вкладки профілю -->
+        <div class="modal-tabs">
+          <button class="modal-tab-btn active" data-tab="ptab-withdraw" data-i18n="tab_withdraw">💸 Виведення коштів</button>
+          <button class="modal-tab-btn" data-tab="ptab-transfer" data-i18n="tab_transfer">🤝 Переказ гравцю</button>
+          <button class="modal-tab-btn" data-tab="ptab-history" data-i18n="tab_history">📜 Історія операцій</button>
+          <button class="modal-tab-btn" data-tab="ptab-stats" data-i18n="tab_stats">📊 Статистика</button>
+        </div>
+
+        <div class="tab-content" id="ptab-withdraw">
+          <label class="form-label" data-i18n="choose_withdraw_method">Оберіть спосіб виплати:</label>
+          <div class="payment-methods-grid">
+            <div class="payment-method-card selected" data-wmethod="card">
+              <div class="method-icon" style="background: #0057b7; color: #fff;">💳</div>
+              <div>
+                <div class="method-title" data-i18n="bank_card">Банківська карта</div>
+                <div class="method-fee">Monobank / Приват / Усі банки</div>
+              </div>
+            </div>
+            <div class="payment-method-card" data-wmethod="usdt">
+              <div class="method-icon" style="background: #26a17b; color: #fff;">₮</div>
+              <div>
+                <div class="method-title">USDT (TRC-20)</div>
+                <div class="method-fee" data-i18n="crypto_wallet">Криптогаманець</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" data-i18n="card_or_wallet_label">Номер банківської карти або гаманця:</label>
+            <input type="text" id="withdraw-account-input" class="bet-input" placeholder="4441 •••• •••• 1234" style="background: var(--bg-input); padding: 12px; border-radius: 8px; border: 1px solid var(--border-subtle); width: 100%;">
+          </div>
+
+          <div class="form-group">
+            <div class="form-label">
+              <span data-i18n="withdraw_amount_label">Сума виведення (₴)</span>
+              <span style="color: var(--text-dim);" data-i18n="min_withdraw">Мінімум: 50 ₴</span>
+            </div>
+            <div class="input-with-addons">
+              <span class="input-addon-currency">₴</span>
+              <input type="number" id="withdraw-amount-input" class="bet-input" value="100" min="50">
+              <button class="btn-bet-mod" id="btn-withdraw-all" style="margin-right: 4px;" data-i18n="btn_all_funds">ВСІ КОШТИ</button>
+            </div>
+          </div>
+
+          <button class="btn-submit-action btn-submit-withdraw" id="btn-submit-withdraw-action">
+            <span>🚀</span> <span data-i18n="btn_withdraw_submit">ВИВЕСТИ КОШТИ</span>
+          </button>
+        </div>
+
+        <!-- Вкладка: Переказ коштів іншому гравцю -->
+        <div class="tab-content" id="ptab-transfer" style="display: none;">
+          <div class="transfer-info-card" style="background: linear-gradient(135deg, rgba(0, 119, 255, 0.12), rgba(0, 212, 255, 0.05)); border: 1px solid rgba(0, 212, 255, 0.3); border-radius: var(--radius-md); padding: 12px; margin-bottom: 14px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 1.3rem;">🤝</span>
+              <div>
+                <div style="font-size: 0.82rem; font-weight: 800; color: #00d4ff;" data-i18n="transfer_title">Миттєвий переказ коштів між гравцями</div>
+                <div style="font-size: 0.72rem; color: var(--text-muted);">
+                  Вкажіть унікальний @username отримувача. Кошти надходять миттєво, без комісії (0%)!
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" data-i18n="transfer_recipient_label">Унікальний юзернейм отримувача (@username):</label>
+            <div style="position: relative; display: flex; align-items: center;">
+              <span style="position: absolute; left: 12px; font-weight: 800; color: #00d4ff; font-size: 1rem;">@</span>
+              <input type="text" id="transfer-recipient-input" class="bet-input" placeholder="taras_cossack" style="background: var(--bg-input); padding: 12px 12px 12px 30px; border-radius: 8px; border: 1px solid var(--border-subtle); width: 100%;">
+            </div>
+            <div id="transfer-recipient-status" style="font-size: 0.72rem; margin-top: 4px; min-height: 18px;"></div>
+            <!-- Список інших зареєстрованих гравців для швидкого вибору -->
+            <div id="transfer-suggested-users" style="margin-top: 6px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center;"></div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-label">
+              <span data-i18n="transfer_amount_label">Сума переказу (₴)</span>
+              <span style="color: var(--text-dim);" id="transfer-available-balance">Доступно: 1,000.00 ₴</span>
+            </div>
+            <div class="input-with-addons">
+              <span class="input-addon-currency">₴</span>
+              <input type="number" id="transfer-amount-input" class="bet-input" value="100" min="1" step="1">
+              <button class="btn-bet-mod" id="btn-transfer-all" style="margin-right: 4px;">ВСІ КОШТИ</button>
+            </div>
+            <div class="chips-row" style="margin-top: 8px; display: flex; gap: 6px; flex-wrap: wrap;">
+              <button type="button" class="btn-chip" data-tchip="50">+50 ₴</button>
+              <button type="button" class="btn-chip" data-tchip="100">+100 ₴</button>
+              <button type="button" class="btn-chip" data-tchip="250">+250 ₴</button>
+              <button type="button" class="btn-chip" data-tchip="500">+500 ₴</button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" data-i18n="transfer_note_label">Примітка / Коментар (необов'язково):</label>
+            <input type="text" id="transfer-note-input" class="bet-input" placeholder="На козацькі кейси 🇺🇦" maxlength="50" style="background: var(--bg-input); padding: 12px; border-radius: 8px; border: 1px solid var(--border-subtle); width: 100%;">
+          </div>
+
+          <button type="button" class="btn-submit-action btn-submit-deposit" id="btn-submit-transfer-action" style="margin-top: 10px; background: linear-gradient(135deg, #0077ff 0%, #00d4ff 100%);">
+            <span>🤝</span> <span data-i18n="btn_submit_transfer">ПЕРЕВЕСТИ КОШТИ</span>
+          </button>
+        </div>
+
+        <div class="tab-content" id="ptab-history" style="display: none;">
+          <div class="history-section-title">
+            <span data-i18n="payment_history_title">Історія платежів</span>
+            <div class="history-filter-pills">
+              <button class="btn-filter-pill active" data-filter="all" data-i18n="filter_all">Всі</button>
+              <button class="btn-filter-pill" data-filter="deposit" data-i18n="filter_deposits">Поповнення</button>
+              <button class="btn-filter-pill" data-filter="withdraw" data-i18n="filter_withdraws">Виведення</button>
+              <button class="btn-filter-pill" data-filter="transfers" data-i18n="filter_transfers">Перекази</button>
+            </div>
+          </div>
+          <div class="history-list" id="transactions-history-list"></div>
+        </div>
+
+        <div class="tab-content" id="ptab-stats" style="display: none;">
+          <div class="profile-stats-grid">
+            <div class="p-stat-box">
+              <div class="p-stat-label" data-i18n="stat_total_games">Всього зіграно ігор</div>
+              <div class="p-stat-value" id="stat-total-games">0</div>
+            </div>
+            <div class="p-stat-box">
+              <div class="p-stat-label" data-i18n="stat_total_won">Загальний виграш</div>
+              <div class="p-stat-value" style="color: #ffd700;" id="stat-total-won">0.00 ₴</div>
+            </div>
+            <div class="p-stat-box">
+              <div class="p-stat-label" data-i18n="stat_best_mult">Найбільший ікс (коефіцієнт)</div>
+              <div class="p-stat-value" style="color: #00d4ff;" id="stat-best-mult">x0.00</div>
+            </div>
+            <div class="p-stat-box">
+              <div class="p-stat-label" data-i18n="stat_total_deposited">Загалом поповнено</div>
+              <div class="p-stat-value" style="color: #10b981;" id="stat-total-deposited">1,000.00 ₴</div>
+            </div>
+          </div>
+
+          <button class="btn-sec-action" id="btn-logout" style="width: 100%; color: #ff3b30; border-color: rgba(255, 59, 48, 0.3);" data-i18n="btn_logout">
+            🚪 Вийти з акаунту
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       МОДАЛЬНЕ ВІКНО: АВТОРИЗАЦІЯ / РЕЄСТРАЦІЯ (ПЕРШИЙ ЗАПУСК)
+       ====================================================================== -->
+  <div class="modal-backdrop" id="modal-auth">
+    <div class="modal-card" style="max-width: 480px;">
+      <div class="modal-header">
+        <div class="modal-title-box">
+          <span style="font-size: 1.5rem;">🇺🇦</span>
+          <h3 class="modal-title" data-i18n="auth_modal_title">Ласкаво просимо!</h3>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <div style="margin-bottom: 16px; text-align: center;">
+          <div style="font-size: 0.75rem; color: var(--text-dim); margin-bottom: 6px;" data-i18n="choose_lang_title">Оберіть мову / Выберите язык:</div>
+          <div class="lang-selector" style="display: inline-flex;">
+            <button class="lang-btn active" data-lang="ua">🇺🇦 Українська</button>
+            <button class="lang-btn" data-lang="ru">🌐 Русский</button>
+          </div>
+        </div>
+
+        <div id="auth-welcome-banner" style="background: linear-gradient(135deg, rgba(0, 119, 255, 0.15), rgba(255, 215, 0, 0.1)); border: 1px solid rgba(255, 215, 0, 0.3); border-radius: var(--radius-md); padding: 14px; text-align: center; margin-bottom: 20px;">
+          <div style="font-family: var(--font-display); font-size: 0.85rem; font-weight: 800; color: #ffd700; margin-bottom: 4px;" id="auth-banner-title" data-i18n="welcome_bonus_title">
+            🎁 ВІТАЛЬНИЙ БОНУС 1,000 ₴
+          </div>
+          <div style="font-size: 0.75rem; color: var(--text-muted);" id="auth-banner-desc" data-i18n="welcome_bonus_desc">
+            Зареєструйся зараз та отримай 1,000 гривень на баланс безкоштовно! Валюта завжди у гривнях (₴).
+          </div>
+        </div>
+
+        <div class="modal-tabs">
+          <button class="modal-tab-btn active" id="tab-auth-register" data-i18n="auth_tab_register">Швидка Реєстрація</button>
+          <button class="modal-tab-btn" id="tab-auth-login" data-i18n="auth_tab_login">Вхід</button>
+        </div>
+
+        <form id="auth-form" onsubmit="return false;">
+          <!-- Логін / відображуване ім'я -->
+          <div class="form-group" id="group-auth-login">
+            <label class="form-label" data-i18n="login_name_label">Ваш логін (ім'я):</label>
+            <input type="text" id="auth-login-name" class="bet-input" placeholder="Наприклад: Козак Тарас" style="background: var(--bg-input); padding: 12px; border-radius: 8px; border: 1px solid var(--border-subtle); width: 100%;">
+          </div>
+
+          <!-- Унікальний юзернейм (@username) -->
+          <div class="form-group" id="group-auth-username">
+            <label class="form-label" id="label-auth-username" data-i18n="username_label">Унікальний юзернейм (@username):</label>
+            <div class="username-input-wrapper" style="position: relative; display: flex; align-items: center;">
+              <span class="username-prefix" id="auth-username-prefix" style="position: absolute; left: 12px; font-weight: 800; color: #00d4ff; font-size: 1rem;">@</span>
+              <input type="text" id="auth-username" class="bet-input" placeholder="taras_cossack" autocomplete="username" required style="background: var(--bg-input); padding: 12px 12px 12px 30px; border-radius: 8px; border: 1px solid var(--border-subtle); width: 100%;">
+            </div>
+            <div class="form-hint" id="auth-username-hint" style="font-size: 0.68rem; color: var(--text-dim); margin-top: 4px;" data-i18n="username_hint">
+              Лише англійські літери, цифри та _ (від 3 до 20 симв.). По ньому інші гравці зможуть переказувати вам кошти!
+            </div>
+          </div>
+
+          <!-- Пароль -->
+          <div class="form-group" id="group-auth-password">
+            <label class="form-label" data-i18n="password_label">Пароль:</label>
+            <input type="password" id="auth-password" class="bet-input" placeholder="••••••••" autocomplete="current-password" required style="background: var(--bg-input); padding: 12px; border-radius: 8px; border: 1px solid var(--border-subtle); width: 100%;">
+          </div>
+
+          <!-- Промокод (тільки для реєстрації) -->
+          <div class="form-group" id="auth-promo-box">
+            <label class="form-label" data-i18n="promocode_bonus_label">Промокод на бонус (+250 ₴):</label>
+            <input type="text" id="auth-promocode" class="bet-input" value="POTUZHNO" style="background: var(--bg-input); padding: 12px; border-radius: 8px; border: 1px solid var(--border-subtle); width: 100%;">
+          </div>
+
+          <button type="submit" class="btn-submit-action btn-submit-deposit" id="btn-auth-submit" style="margin-top: 10px;">
+            <span>✨</span> <span id="btn-auth-submit-text" data-i18n="btn_auth_submit_register">ЗАРЕЄСТРУВАТИСЯ ТА ЗАБРАТИ 1,000 ₴</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       МОБІЛЬНА НАВІГАЦІЯ (ДЛЯ СМАРТФОНІВ IPHONE ТА ANDROID)
+       ====================================================================== -->
+  <nav class="mobile-bottom-nav" id="mobile-bottom-nav">
+    <button class="m-nav-item active" data-mview="lobby">
+      <span class="m-nav-icon">🏛️</span>
+      <span class="m-nav-label" data-i18n="nav_lobby">Лобі</span>
+    </button>
+    <button class="m-nav-item" data-mview="mines">
+      <span class="m-nav-icon">💣</span>
+      <span class="m-nav-label" data-i18n="nav_mines">Міни</span>
+    </button>
+    <button class="m-nav-item" data-mview="crash">
+      <span class="m-nav-icon">🚀</span>
+      <span class="m-nav-label" data-i18n="nav_crash">Краш</span>
+    </button>
+    <button class="m-nav-item" data-mview="roulette">
+      <span class="m-nav-icon">🎡</span>
+      <span class="m-nav-label" data-i18n="nav_roulette">Рулетка</span>
+    </button>
+    <button class="m-nav-item" data-mview="cases">
+      <span class="m-nav-icon">📦</span>
+      <span class="m-nav-label" data-i18n="nav_cases">Кейси</span>
+    </button>
+    <button class="m-nav-item" data-mview="upgrader">
+      <span class="m-nav-icon">⚡</span>
+      <span class="m-nav-label" data-i18n="nav_upgrader">Апгрейд</span>
+    </button>
+    <button class="m-nav-item" id="m-nav-inv-btn">
+      <span class="m-nav-icon">🎒</span>
+      <span class="m-nav-label" data-i18n="nav_inventory">Інвентар</span>
+    </button>
+  </nav>
+
+  <!-- Контейнер для спливаючих сповіщень -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- СКРИПТИ -->
+  <script src="audio.js"></script>
+  <script src="effects.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
